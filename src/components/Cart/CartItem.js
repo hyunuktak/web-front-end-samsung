@@ -2,12 +2,13 @@ import { any, exact, func, number, string } from 'prop-types';
 import styled from 'styled-components/macro';
 import { Counter } from 'components';
 import { currencyKR } from 'utils';
+import { useHandle } from '../../contexts/HandleContext';
 
 export default function CartItem({
   product: { id, photo, name, price, amount, maxAmount },
-  onUpdate,
   ...restProps
 }) {
+  const onUpdate = useHandle();
   return (
     <Container {...restProps}>
       <Photo src={photo} alt="" />

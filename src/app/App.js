@@ -3,6 +3,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import styled, { css } from 'styled-components/macro';
 import GlobalStyle from 'styles/GlobalStyle';
 import { Cart } from 'components';
+import { CartProvider } from 'contexts/CartContext';
+import { HandleProvider } from 'contexts/HandleContext';
 
 export default function App() {
   let [loading, setLoading] = useState(true);
@@ -70,12 +72,13 @@ export default function App() {
     <>
       <GlobalStyle />
       <Container>
-        <Cart
-          title={carts.title}
-          products={carts.products}
-          total={carts.totalPrice}
-          onUpdate={handleUpdateAmount}
-        />
+        <CartProvider value={carts}>
+          <HandleProvider value={handleUpdateAmount}>
+            <Cart
+              title={carts.title}
+            />
+          </HandleProvider>
+        </CartProvider>
       </Container>
     </>
   );
